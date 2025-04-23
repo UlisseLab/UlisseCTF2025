@@ -1,0 +1,10 @@
+services:
+  telemetry:
+    build: .
+    restart: unless-stopped
+    container_name: web01-telemetry
+    environment:
+      FLAG: "UlisseCTF{n3x7_T1m3_st1ck_t0_your_l0g5!}"
+      MAX_FILES: 10
+    ports:
+      - "6969:6969"
