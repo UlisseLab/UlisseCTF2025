@@ -1,0 +1,8 @@
+__pycache__/
+.mypy_cache/
+.venv/
+node_modules/
+**/*.swp
+db/data/*
+!db/data/.gitkeep
+.vscode/

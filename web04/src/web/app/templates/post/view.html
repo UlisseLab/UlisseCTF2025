@@ -1,0 +1,90 @@
+{% set page = "Home" %}
+{% extends 'base.html' %}
+
+{% block head %}
+{% if css %}
+<link rel="stylesheet" href="{{ url_for('static', filename=css['path'], v=css['version']) }}" />
+{% endif %}
+{% endblock head%}
+
+{% block main %}
+<h2 class="row center">
+    Your Posts
+</h2>
+
+{% for post in posts %}
+<div class="row">
+    <div class="col s12 m10 offset-m1 l8 offset-l2">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ post['title'] }}</span>
+                <p>{{ post['content'] }}</p>
+            </div>
+            <div class="card-action">
+                {% if show_actions %}
+                <form action="/posts/delete/{{ post['id'] }}" method="POST" style="display: inline;">
+                    <button type="submit" class="btn waves-effect waves-light red darken-4">
+                        <span class="left hide-on-small-and-down" style="margin-right: 15px;">Delete</span><i
+                            class="material-icons center">delete</i>
+                    </button>
+                </form>
+                <button class="btn waves-effect waves-light teal share-btn" data-post-id="{{ post['id'] }}">
+                    <span class="left hide-on-small-and-down" style="margin-right: 15px;">Share with admin</span>
+                    <i class="material-icons center">share</i>
+                </button>
+
+
+                {% endif %}
+                <a class="btn waves-effect waves-light blue darken-4"
+                    href="{{ url_for('view_post', post_id=post['id']) }}">
+                    <span class="left hide-on-small-and-down" style="margin-right: 15px;">View</span><i
+                        class="material-icons center">pageview</i>
+                </a>
+
+            </div>
+        </div>
+        {% if "notes" in post %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Notes</span>
+                {% if post['notes'] %}
+                <ul class="collection">
+                    {% autoescape false %}
+                    {% for comment in post['notes'] %}
+                    <li class="collection-item">
+                        <p>{{ comment['content'] }}</p>
+                    </li>
+                    {% endfor %}
+                    {% endautoescape %}
+                </ul>
+                {% else %}
+                <p>No notes yet</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                <form action="{{ url_for('new_comment', post_id=post['id']) }}" method="POST">
+                    <div class="input-field">
+                        <input type="text" id="note" name="note" />
+                        <label for="note">Add a note</label>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit" name="action" id="submit-note">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% if not posts %}
+<p class="row center">
+    You don't have any post yet.<br>
+    You can create a post <a href="{{ url_for('new_post') }}">here</a>.
+</p>
+{% endif %}
+
+{% if show_actions %}
+<script src="{{ url_for('static', filename='pow.js', v=config['VERSION']) }}" defer></script>
+{% endif %}
+{% endblock main %}

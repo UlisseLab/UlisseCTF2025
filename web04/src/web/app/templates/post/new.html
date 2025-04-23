@@ -1,0 +1,30 @@
+{% set page = 'New Post' %}
+{% extends 'base.html' %}
+
+{% block main %}
+<h2 class="row center">Make a new post</h2>
+<p class="row center">
+    You can write a new post here.
+</p>
+<div class="row">
+    <div class="col s10 offset-s1 m6 offset-m3">
+        <form action="" method="POST" class="card">
+            <div class="card-content">
+                <div class="input-field">
+                    <input type="text" name="title" id="">
+                    <label for="title">Title</label>
+                </div>
+                <div class="input-field">
+                    <textarea name="content" id="" class="materialize-textarea"></textarea>
+                    <label for="content">Content</label>
+                </div>
+            </div>
+            <div class="card-action">
+                <button type="submit" class="btn waves-effect waves-light">
+                    Submit <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main %}
