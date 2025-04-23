@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            body {
+                margin: 0;
+            }
+            .monitor {
+                width: 500px;
+                height: 300px;
+                overflow: hidden;
+                border: solid 1em #333;
+                border-radius: 0.5em;
+            }
+            .stand:before {
+                content: "";
+                display: block;
+                position: relative;
+                background: #222;
+                width: 150px;
+                height: 50px;
+                top: 382px;
+                left: 190px;
+            }
+            .stand:after {
+                content: "";
+                display: block;
+                position: relative;
+                background: #333;
+                border-top-left-radius: 0.5em;
+                border-top-right-radius: 0.5em;
+                width: 300px;
+                height: 15px;
+                top: 50px;
+                left: 115px;
+            }
+            .center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            h1 {
+                text-align: center;
+                font-size: 3em;
+                font-family: Helvetica;
+                color: #333;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <div>
+                <h1>POV</h1>
+                <div class="stand">
+                    <div class="monitor">
+                        <img src="/api/stream" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
