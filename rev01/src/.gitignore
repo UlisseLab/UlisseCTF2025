@@ -1,0 +1,4 @@
+.mypy_cache
+src/flag.h
+bin/*
+!bin/.gitkeep
