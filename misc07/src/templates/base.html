@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ludovico Casciarolo – 🜍 </title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #e3dcc4;
+            font-family: 'Cormorant Garamond', serif;
+            padding: 2em;
+            background-image: radial-gradient(#2c2c2c 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        a {
+            color: #99ffcc;
+            text-decoration: none;
+            margin-right: 1.5em;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .schizo {
+            background: linear-gradient(135deg, rgba(30,30,30,0.9), rgba(0,0,0,0.8));
+            border: 2px dashed #ffb347;
+            padding: 1.5em;
+            margin-top: 1.5em;
+            box-shadow: 0 0 25px #ffd70044;
+        }
+        .schizo img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1em auto;
+            border: 1px solid #444;
+        }
+
+        input[type="text"] {
+            background-color: #1a1a1a;
+            border: 1px solid #ffb347;
+            padding: 0.5em;
+            color: #e3dcc4;
+            width: 100%;
+            margin-top: 0.2em;
+        }
+
+        input::placeholder {
+            color: #888;
+            font-style: italic;
+        }
+
+        blockquote {
+            color: #ffcc99;
+            border-left: 3px solid #ff9933;
+            padding-left: 1em;
+            font-style: italic;
+        }
+        h1 {
+            font-family: 'UnifrakturCook', cursive;
+            font-size: 3em;
+            color: #ff4444;
+            text-shadow: 2px 2px #000000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h1 img {
+            height: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ludovico Casciarolo – 🜍 </h1>
+        <nav>
+            <a href="/">Blog</a>
+            <a href="/whoami">Who am I</a>
+            <a href="/getsecret">Get Secret</a>
+        </nav>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
