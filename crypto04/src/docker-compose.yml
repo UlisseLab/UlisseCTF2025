@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  bridger:
+    build: .
+    environment:
+      - MNEMONIC=cactus brown barrel silver meadow fatigue foster access garden actor dove remind simple lion lend
+      - FLAG=UlisseCTF{br1d61n6_my_way_70_f1n4nc1a1_fr33d00m}
+      - ETH_PRIVATE_KEY=0x8f8247dd63e8b3d5cf8500e07495673672580dd2ab607143f07642fd129d27c9
+      - ETH_PUBLIC_KEY=0x0DB7eCC56Ee1D6C977f393E67e46a3360b80a145
+      - CONTRACT_ADDRESS=0x9e8123cd548F36F6E9A806f9A6346CF246E940bd
+      - ETH_PUB_ADMIN=0xfBE1c99586903F72d37cFf5bCd74494b69D8235f
+      - BASE=138.199.236.43
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "5000:5000"
+    privileged: true
+    networks:
+      - orchestrator-net
+  offchain:
+    build: ./offchain
+    image: "offchain-signer"
+    networks:
+      - orchestrator-net
+    entrypoint: "/bin/bash -c exit"
+
+networks:
+  orchestrator-net:
+    driver: bridge
+    name: orchestrator-net
