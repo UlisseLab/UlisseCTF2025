@@ -1,0 +1,7 @@
+sample:
+  description: CTF zephyr
+  name: ctf zephyr
+common:
+  tags: security
+  integration_platforms:
+    - native_sim
