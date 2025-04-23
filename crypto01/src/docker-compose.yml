@@ -1,0 +1,15 @@
+services:
+  yetanotheroracle:
+    build: .
+    restart: unless-stopped
+    init: true
+    privileged: true
+    container_name: crypto01-yetanotheroracle
+    command: ["/usr/local/bin/python3", "/home/user/server.py"]
+    ports:
+      - "5339:1337"
+    volumes:
+      - "./server.py:/home/user/server.py:ro"
+    environment:
+      - "FLAG=UlisseCTF{s33ms_y0u_kn0w_wh@ts_m4rs1enne_tw1st3r_1s_4ll_@b0ut}"
+      - "FLAG_IN_ENV=true"
