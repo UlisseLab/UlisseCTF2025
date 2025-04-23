@@ -1,0 +1,16 @@
+services:
+  cheri:
+    restart: unless-stopped
+    container_name: pwn03-cheri
+    build:
+      context: ./run
+    volumes:
+      - '../attachments/cheri-challenge:/challenge/attachments/cheri-challenge:ro' # Challenge executable
+    init: true
+    ports:
+      - '5534:54321'
+    environment:
+      - 'FLAG=UlisseCTF{M0d3rn_T4lk1ng_f0r_0ld_Vuln3r4b1l1t13s}'
+      - 'PORT=54321'
+      - 'BAR=Hello, World!'
+
