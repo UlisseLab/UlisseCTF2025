@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Telemetry | Home</title>
+        <meta name="description" content="Still under construction">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    </head>
+    <body>
+        <h1>Telemetry</h1>
+        <p>
+            Still under construction, here you can login and 
+            <i>just</i> <a href="{% if session.get('user') %}{{ url_for('upload') }}{% else %}#upload{% endif %}">upload</a> a file.
+            <br>
+            You can also check a template for telemetry <a href="{{ url_for('check') }}">here</a>
+        </p>
+        <form action="{{ url_for('login') }}" method="post">
+            <label for="user">Username:</label>
+            <input type="text" id="user" name="user" placeholder="Username"/>
+            <input type="text" id="log" name="log" placeholder="Log"/>
+            <input type="submit" value="Login"/>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for category, message in messages %}
+                    <li style="color: {{ 'red' if category == 'danger' else 'green' }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </body>
+</html>

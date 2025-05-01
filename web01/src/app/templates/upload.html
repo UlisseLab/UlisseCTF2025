@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Telemetry | Upload</title>
+        <meta name="description" content="Still under construction">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    </head>
+    <body>
+        <h1>Telemetry</h1>
+        <p>Still under construction but feel free to upload a file</p>
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+            <label for="avatar">Upload a file:</label>
+            <input type="file" id="file" name="file"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for category, message in messages %}
+                    <li style="color: {{ 'red' if category == 'danger' else 'green' }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </body>
+</html>
