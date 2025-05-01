@@ -1,0 +1,7 @@
+services:
+  supercomputer-server:
+    build: .
+    ports:
+      - "5533:8080"
+    container_name: misc03-supercomputer
+    restart: unless-stopped
