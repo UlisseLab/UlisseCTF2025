@@ -1,0 +1,11 @@
+services:
+  eighth-secret:
+    build: .
+    restart: unless-stopped
+    container_name: misc07-eighth-secret
+    ports:
+      - "7778:7778"
+    environment:
+      - FLAG_LAT=44.492
+      - FLAG_LON=11.343
+      - ULISSE_FLAG=UlisseCTF{U_ju5T_h4v3_Cr34t3d_g0ld_1n_y0uR_1nn3r_s3lf}
