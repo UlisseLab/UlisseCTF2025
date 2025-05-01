@@ -1,0 +1,17 @@
+services:
+  x864oracle:
+    image: cybersecnatlab/challenge-jail:ubuntu-focal@sha256:d40fa9d97a4b62c68347f4b02b08ed651c39811fc8687759480699888f2f0bd6
+    restart: unless-stopped
+    container_name: pwn04-x864oracle
+    privileged: true
+    init: true
+    ports:
+      - "5353:1337"
+    volumes:
+      - "./oracle:/home/user/chall:ro"
+      - "./libs:/home/user/libs:ro"
+    environment:
+      - "SET_RPATH=/home/user/libs"
+      - "SET_INTERPRETER=/home/user/libs/ld-linux.so"
+      - "FLAG=UlisseCTF{1t_s33ms_y0u_4ls0_gr4du4t3d_@_pWn.college}"
+      - "LOG_STDERR=true"
