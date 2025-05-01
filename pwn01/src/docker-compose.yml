@@ -1,0 +1,14 @@
+services:
+  zig_zag_zoogle:
+    image: cybersecnatlab/challenge-jail:ubuntu-focal@sha256:d40fa9d97a4b62c68347f4b02b08ed651c39811fc8687759480699888f2f0bd6
+    restart: unless-stopped
+    container_name: pwn01-zig
+    privileged: true
+    init: true
+    ports:
+      - "5331:1337"
+    volumes:
+      - "./chall:/home/user/chall:ro" # Challenge executable
+    environment:
+      - "FLAG=UlisseCTF{Z1gZ4gZ00gl3_Y0ur_s3cur1ty_1s_n0w_4_N00dl3}"
+      - "FLAG_IN_ENV=true" # default: false
