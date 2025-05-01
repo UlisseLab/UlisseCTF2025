@@ -1,0 +1,80 @@
+<!--Thanks chatGpt for the styling :)-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password checker</title>
+    <script src="check.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+      }
+      .container {
+        text-align: center;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      input {
+        padding: 10px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      #result {
+        margin-top: 15px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Password checker</h2>
+      <input type="text" id="guess" placeholder="Enter your guess" />
+      <button onclick="checkGuess()">Submit</button>
+      <p id="result"></p>
+    </div>
+
+    <script>
+      function checkGuess() {
+        const userGuess = document.getElementById("guess").value;
+        const result = document.getElementById("result");
+
+        var correct = Module.ccall(
+          "password_check",
+          "number",
+          ["string"],
+          [userGuess]
+        );
+
+        if (correct) {
+          result.textContent = "Correct! You found my password!";
+          result.style.color = "green";
+        } else {
+          result.textContent = "Wrong guess. Try again!";
+          result.style.color = "red";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+services:
+  password_checker:
+    build:
+      context: .
+      secrets:
+        - flag
+    restart: unless-stopped
+    container_name: rev02-password-checker
+
+    ports:
+      - "5337:80"
+
+secrets:
+  flag:
+    file: "../flags.txt"
