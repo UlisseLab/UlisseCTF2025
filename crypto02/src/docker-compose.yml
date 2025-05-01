@@ -1,0 +1,15 @@
+services:
+  degarble:
+    build: .
+    restart: unless-stopped
+    init: true
+    privileged: true
+    container_name: crypto02-degarble
+    command: ["/usr/local/bin/python3", "/home/user/server.py"]
+    ports:
+      - "4456:1337"
+    volumes:
+      - "./server.py:/home/user/server.py:ro"
+    environment:
+      - "FLAG=UlisseCTF{G4r8L3d_5TuFF_Is_C00l}"
+      - "FLAG_IN_ENV=true"
