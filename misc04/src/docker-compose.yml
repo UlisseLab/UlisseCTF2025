@@ -1,0 +1,27 @@
+name: pov_chall
+
+services:
+  server:
+    build: .
+    container_name: pov_chall_server
+    depends_on:
+      gen:
+        condition: service_completed_successfully
+    ports:
+      - "8888:8080"
+    volumes:
+      - assets:/app/assets:ro
+      - ./index.html:/app/index.html:ro
+    restart: unless-stopped
+
+  gen:
+    build: ./gen
+    container_name: pov_chall_gen
+    volumes:
+      - assets:/app/assets
+    environment:
+      - FLAG=UlisseCTF{p3r51573nc3_0f_v1510n}
+    command: node main.js
+
+volumes:
+  assets:
