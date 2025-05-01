@@ -1,0 +1,5 @@
+Flask
+Flask-PyMongo
+gunicorn
+apscheduler
+pyjwt

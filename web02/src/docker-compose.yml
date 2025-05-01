@@ -1,0 +1,46 @@
+x-common-environment: &common-env
+  MONGO_HOST: ${MONGO_HOST}
+  MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+  MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+  MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+  JWT_SECRET: ${JWT_SECRET}
+
+services:
+  frontend:
+    build: ./frontend
+    restart: always
+    container_name: web02-frontend
+    depends_on:
+      - mongodb
+    environment:
+      <<: *common-env
+      PORT: 3000
+
+  backend:
+    build: ./backend
+    restart: always
+    container_name: web02-backend
+    depends_on:
+      - mongodb
+    environment:
+      <<: *common-env
+      FLAG2: "UlisseCTF{w3ll_4t_l3ast_y0u_kn0w_A_b1t_0f_b1n4ry}"
+      FLAG1: "UlisseCTF{N0SQL?!Plz_t4k3_m3_b4ck_t0_my_SQL1nj3ct10ns}"
+      PORT: 4000
+
+  mongodb:
+    image: mongo
+    container_name: web02-mongodb
+    environment:
+      <<: *common-env
+    command: mongod --quiet --logpath /dev/null
+
+  nginx:
+    build: ./config
+    container_name: web02-nginx
+    restart: always
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - "7723:80"
