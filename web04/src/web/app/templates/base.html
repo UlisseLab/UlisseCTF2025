@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Viby Notes - {{ page }}</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">        
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav id="nav-mobile" class="blue darken-4 white-text nav-wrapper">
+            <div class="container">
+                <a href="{{ url_for('index') }}" class="brand-logo left">Viby Notes</a>
+                <ul class="center hide-on-med-and-down right">
+                    <li {% if page == 'Home' %}class="active"{% endif %}><a href="{{ url_for('index') }}">Home</a></li>
+                    <li {% if page == 'Register' %}class="active"{% endif %}><a href="{{ url_for('register') }}">Register</a></li>
+                    <li {% if page == 'Login' %}class="active"{% endif %}><a href="{{ url_for('login') }}">Login</a></li>
+                    <li {% if page == 'New Post' %}class="active"{% endif %}><a href="{{ url_for('new_post') }}">New Post</a></li>
+                    <li {% if page == 'Profile' %}class="active"{% endif %}><a href="{{ url_for('profile') }}">Profile</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% block header %}
+            
+        {% endblock header %}
+    </header>
+    <main class="container">
+        {% block main %}
+        {% endblock %}
+    </main>
+    <footer>
+    </footer>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" async defer></script>
+</body>
+</html>

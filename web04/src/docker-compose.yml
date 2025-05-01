@@ -1,0 +1,87 @@
+services:
+  web04-headless:
+    image: cybersecnatlab/challenge-headless@sha256:70eb983172a949599fb599f8325e7d70d30bc0747be0614173d3de76aae5c077
+    restart: unless-stopped
+    environment:
+      AUTH_TOKEN: ${ADMIN_AUTH_TOKEN}
+      RABBITMQ_HOST: web04-headless-rabbitmq
+      RABBITMQ_QUEUE: headless-jobs
+    depends_on:
+      - web04-headless-rabbitmq
+    networks:
+      - web04-admin
+
+  web04-headless-rabbitmq:
+    image: rabbitmq:3.11
+    container_name: web04-headless-rabbitmq
+    restart: unless-stopped
+    networks:
+      - web04-admin
+
+  web04-headless-worker:
+    image: cybersecnatlab/challenge-headless@sha256:94b65900d5c41bcccdba304600b5b4d7dba6a8f7a9fcb6d01e3fa7c95361726e
+    restart: unless-stopped
+    environment:
+      RABBITMQ_HOST: web04-headless-rabbitmq
+      RABBITMQ_QUEUE: headless-jobs
+    deploy:
+      replicas: 4
+    depends_on:
+      - web04-headless-rabbitmq
+    networks:
+      - web04-admin
+      - web04-frontend
+
+  web04-nginx:
+    image: nginx:1.25-alpine
+    restart: unless-stopped
+    container_name: web04-nginx
+    ports:
+      - "${CHALLENGE_PORT}:8081"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    links:
+      - "web04-web:web04-backend"
+    networks:
+      - web04-frontend
+
+  web04-web:
+    build: ./web
+    restart: unless-stopped
+    env_file:
+      - .env
+      - web/.env
+    environment:
+      DB_HOST: web04-db
+      ADMIN_HOST: web04-headless
+      APP_HOST: web04-web
+    volumes:
+      - ./web/app/static/uploads:/srv/app/app/static/uploads
+    depends_on:
+      - web04-db
+    networks:
+      - web04-backend
+      - web04-frontend
+      - web04-admin
+
+  web04-db:
+    image: mysql:lts
+    restart: unless-stopped
+    container_name: web04-db
+    env_file:
+      - .env
+      - db/.env
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./db/scripts:/docker-entrypoint-initdb.d
+      - ./db/data:/var/lib/mysql
+    networks:
+      - web04-backend
+
+networks:
+  web04-admin:
+  web04-backend:
+  web04-frontend:

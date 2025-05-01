@@ -1,0 +1,19 @@
+[project]
+name = "web"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=3.1.0",
+    "gevent>=24.11.1",
+    "gunicorn>=23.0.0",
+    "mysql-connector-python>=9.2.0",
+    "requests>=2.32.3",
+    "uuid>=1.30",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+]

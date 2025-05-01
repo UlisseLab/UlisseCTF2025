@@ -1,0 +1,60 @@
+{% set page = "Profile" %} {% extends 'base.html' %} {% block main %}
+<h2 class="row center">Your Profile</h2>
+<p class="row center">View and customize your profile here.</p>
+
+<!-- Profile Overview Section -->
+<div class="row">
+  <div class="col s12 m8 offset-m2">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Profile Details</span>
+		<div class="valign-wrapper">
+          <!-- Profile Picture (Left Side) -->
+	<div class="row">
+          <div class="col s4 center">
+            <img
+              src="{{ url_for('static', filename='default-avatar.png', v=config['VERSION']) }}"
+              alt="Profile Picture"
+              class="circle responsive-img"
+              width="120px"
+            />
+          </div>
+
+          <!-- Username & CSS Upload (Right Side) -->
+          <div class="col s8">
+            <h5><strong>Username:</strong> {{ user["username"] }}</h5>
+            <p>Upload a custom CSS file to personalize your experience.</p>
+            {% if user["css"] %}
+            <p>Your current stylesheet is <a href="{{ url_for('static', filename='uploads/' + user['id'] + '.css', v=user['css']) }}">here</a>.</p>
+            {% endif %}
+          </div>
+		</div>
+        </div>
+      </div>
+      <div class="card-action">
+        <form
+          action="{{ url_for('upload_css') }}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Upload CSS</span>
+              <input type="file" name="css_file" accept=".css" onchange="this.form.submit()" />
+            </div>
+            <div class="file-path-wrapper">
+              <input
+                class="file-path validate"
+                type="text"
+                placeholder="Choose a CSS file"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock main %}
+
