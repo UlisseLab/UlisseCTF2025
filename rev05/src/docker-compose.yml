@@ -1,0 +1,10 @@
+version: '3'
+services:
+  pet:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "7788:7788"
+    container_name: rev05-pet
+    environment:
+      - SECRET_FLAG=UlisseCTF{4dv3rs4r14l_l0g1t_t4rg3t1ng_ftw}

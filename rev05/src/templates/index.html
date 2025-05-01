@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Who is man's best friend?</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to right, #ffccff, #ccffff);
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #333;
+      text-shadow: 2px 2px #fff;
+    }
+
+    .meme-caption {
+      font-size: 1.2em;
+      color: #ff0066;
+      margin-top: -15px;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    .anime-img {
+      width: 200px;
+      border-radius: 10px;
+      margin: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .anime-img:hover {
+      transform: scale(1.1) rotate(-2deg);
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    .custom-upload {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 8px;
+      background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
+      color: white;
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-weight: bold;
+      text-shadow: 1px 1px #000;
+      box-shadow: 0 0 10px #ff00ff;
+      animation: rainbow-glow 3s infinite linear;
+    }
+
+    @keyframes rainbow-glow {
+      0% { box-shadow: 0 0 10px red; }
+      25% { box-shadow: 0 0 10px orange; }
+      50% { box-shadow: 0 0 10px lime; }
+      75% { box-shadow: 0 0 10px cyan; }
+      100% { box-shadow: 0 0 10px violet; }
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    pre {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    #fileName {
+      display: block;
+      margin: 10px;
+      font-style: italic;
+      color: #444;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Who is man's best friend?</h1>
+  <div class="meme-caption">The dog? The cat? Or the FLAG? 🐶😼🚩</div>
+
+  <img src="https://media.tenor.com/eJHXjrSik4gAAAAd/dog-dance.gif" class="anime-img" alt="dog dance">
+  <img src="https://media.tenor.com/2roX3uxz_68AAAAC/cute-anime.gif" class="anime-img" alt="cute anime">
+  <img src="https://media.tenor.com/yheo1GGu3FwAAAAC/cat-jam.gif" class="anime-img" alt="cat jam">
+
+  <form id="uploadForm" enctype="multipart/form-data">
+    <label for="imageInput" class="custom-upload">🌈 Choose your destiny</label>
+    <input type="file" id="imageInput" name="image" required>
+    <span id="fileName">No file chosen</span>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <pre id="result">Upload your image to find the truth... 🧠</pre>
+
+  <div class="footer">
+    Powered by Powered by Black Magic and Evil Forces™ 😈
+  </div>
+
+  <script>
+    document.getElementById("uploadForm").onsubmit = async function(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById("imageInput");
+      if (!fileInput.files.length) return;
+
+      const formData = new FormData();
+      formData.append("image", fileInput.files[0]);
+
+      const response = await fetch("/predict", {
+        method: "POST",
+        body: formData
+      });
+
+      const text = await response.text();
+      document.getElementById("result").textContent = text;
+    };
+
+    document.getElementById("imageInput").onchange = function () {
+      const name = this.files[0]?.name || "No file chosen";
+      document.getElementById("fileName").textContent = name;
+    };
+  </script>
+</body>
+</html>
