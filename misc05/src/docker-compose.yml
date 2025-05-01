@@ -1,0 +1,11 @@
+services:
+  minestom-server:
+    build: .
+    container_name: misc05-minestom
+    ports:
+      - "25565:25565"
+
+    restart: unless-stopped
+    environment:
+      - "NODONTGETMYSECRET=UlisseCTF{w3_l0v3_c0d1ng_1n_cyr1ll1c}"
+      - "TZ=Europe/Rome"
