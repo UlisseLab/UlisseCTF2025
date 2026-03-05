@@ -28,28 +28,20 @@ This is a remote challenge, you can connect with:
 
 ## Italiano
 
-- [Ambiguous Collisions Writeup](#ambiguous-collisions-writeup)
-  - [Italiano](#italiano)
-  - [English](#english)
-  - [Panoramica della Sfida](#panoramica-della-sfida)
-  - [Soluzione Passo-Passo](#soluzione-passo-passo)
-    - [Livello 1](#livello-1)
-    - [Livello 2](#livello-2)
-    - [Livello 3](#livello-3)
-  - [Conclusione](#conclusione)
-  - [Challenge Overview](#challenge-overview)
-  - [Step-by-Step Solution](#step-by-step-solution)
-    - [Level 1](#level-1)
-    - [Level 2](#level-2)
-    - [Level 3](#level-3)
-  - [Conclusion](#conclusion)
+- [Panoramica della Sfida](#panoramica-della-sfida)
+- [Soluzione Passo-Passo](#soluzione-passo-passo)
+  - [Livello 1](#livello-1)
+  - [Livello 2](#livello-2)
+  - [Livello 3](#livello-3)
+- [Conclusione](#conclusione)
 
 ## English
 
 - [Challenge Overview](#challenge-overview)
-- [Level 1](#level-1)
-- [Level 2](#level-2)
-- [Level 3](#level-3)
+- [Step-by-Step Solution](#step-by-step-solution)
+  - [Level 1](#level-1)
+  - [Level 2](#level-2)
+  - [Level 3](#level-3)
 - [Conclusion](#conclusion)
 
 ## Panoramica della Sfida
