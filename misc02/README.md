@@ -25,35 +25,19 @@ Website: [http://teeths.challs.ulisse.ovh:5000](http://teeths.challs.ulisse.ovh:
 
 ## Italiano
 
-- [Language Generator Writeup](#language-generator-writeup)
-  - [Italiano](#italiano)
-  - [English](#english)
-  - [Panoramica della Challenge](#panoramica-della-challenge)
-  - [Vicolo Cieco](#vicolo-cieco)
-  - [Soluzione Passo-Passo](#soluzione-passo-passo)
-  - [Derivazioni](#derivazioni)
-  - [Conclusione](#conclusione)
-  - [Challenge Overview](#challenge-overview)
-  - [Honeypot](#honeypot)
-  - [Step-by-Step Solution](#step-by-step-solution)
-  - [Derivations](#derivations)
-  - [Conclusion](#conclusion)
+- [Panoramica della Challenge](#panoramica-della-challenge)
+- [Vicolo Cieco](#vicolo-cieco)
+- [Soluzione Passo-Passo](#soluzione-passo-passo)
+- [Derivazioni](#derivazioni)
+- [Conclusione](#conclusione)
 
 ## English
 
-- [Language Generator Writeup](#language-generator-writeup)
-  - [Italiano](#italiano)
-  - [English](#english)
-  - [Panoramica della Challenge](#panoramica-della-challenge)
-  - [Vicolo Cieco](#vicolo-cieco)
-  - [Soluzione Passo-Passo](#soluzione-passo-passo)
-  - [Derivazioni](#derivazioni)
-  - [Conclusione](#conclusione)
-  - [Challenge Overview](#challenge-overview)
-  - [Honeypot](#honeypot)
-  - [Step-by-Step Solution](#step-by-step-solution)
-  - [Derivations](#derivations)
-  - [Conclusion](#conclusion)
+- [Challenge Overview](#challenge-overview)
+- [Honeypot](#honeypot)
+- [Step-by-Step Solution](#step-by-step-solution)
+- [Derivations](#derivations)
+- [Conclusion](#conclusion)
 
 ## Panoramica della Challenge
 
@@ -101,7 +85,7 @@ Ed inoltre compare un ulteriore indizio.
 Effettivamente aggiungendo quelle produzioni vengono generate nell'ordine "clearlog" e "showlog" e possiamo quindi spiegarci quello che è successo... ma non avrebbe dovuto aggiungere produzioni!
 Superato lo sgomento iniziale, ci si rende conto che il numero massimo di produzioni consentito è stato superato. Questo porta a un'ipotesi: forse è possibile utilizzare più di cinque produzioni, e in tal caso un client-side validation bypass potrebbe essere fattibile, anche se non nel modo in cui inizialmente avevamo ipotizzato nella sezione [Vicolo Cieco](#vicolo-cieco).
 
-Sotto questa ipotesi, è possibile trovare un altro modo per generare "showlog", ingolositi dalla produzione M: lo | BA, e utilizzando complessivamente la sequenza delle produzioni BGMOQS. Per far funzionare il generatore è necessario bypassare il controllo JavaScript in due modi: non solo si devono utilizzare più di cinque produzioni, ma occorre anche modificare l'ordine in cui vengono fornite. Il generatore parte sempre dalla prima produzione che deve essere O e non B. Non è semplice capirlo ma ci sono diversi indizi:
+Sotto questa ipotesi, è possibile trovare un altro modo per generare "showlog", ingolositi dalla produzione M: lo | BA, e utilizzando complessivamente la sequenza delle produzioni GIMOQS. Per far funzionare il generatore è necessario bypassare il controllo JavaScript in due modi: non solo si devono utilizzare più di cinque produzioni, ma occorre anche modificare l'ordine in cui vengono fornite. Il generatore parte sempre dalla prima produzione che deve essere O e non B. Non è semplice capirlo ma ci sono diversi indizi:
 
 - Quando si scrive una grammatica formalmente si mette sempre lo scopo come prima produzione
 - Il secondo de cinque indizi accenna a come si debba partire dall'inizio
@@ -110,19 +94,19 @@ Sotto questa ipotesi, è possibile trovare un altro modo per generare "showlog",
 Esaminando log.txt ci si accorge che ad ogni grammatica precedente è associato un traversal dfs (Depth-First Search, ovvero ricerca in profondità). Per chi non è familiare con le tecniche di esplorazione degli alberi, una rapida ricerca online permette di comprendere come la ricerca DFS non esplori necessariamente tutto l'albero.
 Dopo un'attenta osservazione, si nota che il motivo per cui la stringa "getflag" non era stata generata è proprio questo.
 
-A questo punto è necessario generare qualcosa che modifichi la modalità di esplorazione dell'albero. E' ragionevole provare a comporre "traversal", accompagnato magari da un qualche verbo. La produzione X: pK | tra è un vicolo cieco. Le produzioni corrette sono GNOTUV, e la prima deve essere N. Così si può produrre "changetraversal". Se si genera nuovamente showlog si può verificare che il metodo di esplorazione è cambiato. A questo punto è possibile recuperare la flag con la [grammatica descritta inizialmente](#soluzione-passo-passo), e facendo poi il download di flag.txt per riscuotere la meritata ricompensa.
+A questo punto è necessario generare qualcosa che modifichi la modalità di esplorazione dell'albero. E' ragionevole provare a comporre "traversal", accompagnato magari da un qualche verbo. La produzione X: pK | tra è un vicolo cieco. Le produzioni corrette sono GNOPTUV, e la prima deve essere N. Così si può produrre "changetraversal". Se si genera nuovamente showlog si può verificare che il metodo di esplorazione è cambiato. A questo punto è possibile recuperare la flag con la [grammatica descritta inizialmente](#soluzione-passo-passo), e facendo poi il download di flag.txt per riscuotere la meritata ricompensa.
 
 ## Derivazioni
 
-| **Produzioni** | **Derivazione**                                                                          |
-| -------------- | ---------------------------------------------------------------------------------------- |
-| **R**          | R → hint                                                                                 |
-| **AHLSW**      | A → pL → pleaS → pleaseHt → pleasehWt → pleasehint                                       |
-| **BGHKW(LV)**  | B → cLK → clVrK → clerrK → clearlog → clearlogP → clearlog                               |
-| **BGHKW(LV)**  | B → sH → shW → showK → showloG → showlogP → showlog                                      |
-| **BGMOQS**     | O → QI → SoI → shoI → showMG → showloG → showlogP → showlog                              |
-| **GNOTUV**     | N → cOG → chanG → chanGtrT → changPtrT → changetraUal → changetravVsal → changetraversal |
-| **ADGPQY**     | Y → GQY → gPQY → geQY → getDY → getflY → getflag                                         |
+| **Produzioni** | **Derivazione**                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------------------- |
+| **R**          | R → hint                                                                                             |
+| **AHLSW**      | A → pL → pleaS → pleaseHt → pleasehWt → pleasehint                                                   |
+| **BGHKW(LV)**  | B → cLK → clVrK → clerrK → clearlog → clearlogP → clearlog                                           |
+| **BGHKW(LV)**  | B → sH → shW → showK → showloG → showlogP → showlog                                                  |
+| **GIMOQS**     | O → QI → SoI → shoI → showMG → showloG → showlogP → showlog                                          |
+| **GNOPTUV**    | N → cOG → chanG → chanGtrT → changPtrT → changetrT → changetraUal → changetravVsal → changetraversal |
+| **ADGPQY**     | Y → GQY → gPQY → geQY → getDY → getflY → getflag                                                     |
 
 ## Conclusione
 
@@ -167,11 +151,12 @@ At this point, the next step is to search for a grammar that produces a kinder m
 `If only you could convince me to show you the log...`
 
 At this point, we search for productions containing the letters of "log". The production K: loG | Jf seems to be the most promising. Indeed, it is possible to compose the string "showlog" using the productions BGHKW. An interesting observation is that it would be intuitive to also include production P, using the ε (epsilon) option, which represents an empty production. However, we cannot include it, as the system imposes a maximum of 5 productions to be used. Fortunately, even without production P, everything works fine. This happens because the expansion of non-terminal symbols not included in the grammar returns ε. The result obtained is peculiar. We can access the log, but it is deleted. Moreover, an additional clue appears.
+
 `I understood what you had in mind and decided to add L and V to your productions`
 
 Indeed, by adding those productions, "clearlog" and "showlog" are generated in order, and we can explain what happened... but it shouldn’t have added productions! After the initial shock, we realize that the maximum number of productions allowed has been exceeded. This leads to a hypothesis: perhaps it is possible to use more than five productions, in which case a client-side validation bypass might be feasible, though not in the way we initially hypothesized in the [Honeypot](#honeypot) section.
 
-Under this hypothesis, it is possible to find another way to generate "showlog", tempted by production M: lo | BA, and using the sequence of productions BGMOQS. To make the generator work, two things need to be bypassed in the JavaScript check: not only do we need to use more than five productions, but we must also modify the order in which they are provided. The generator always starts from the first production, which must be O, not B. It’s not easy to figure this out, but there are various hints:
+Under this hypothesis, it is possible to find another way to generate "showlog", tempted by production M: lo | BA, and using the sequence of productions GIMOQS. To make the generator work, two things need to be bypassed in the JavaScript check: not only do we need to use more than five productions, but we must also modify the order in which they are provided. The generator always starts from the first production, which must be O, not B. It’s not easy to figure this out, but there are various hints:
 
 - When writing a grammar formally, the goal is always placed as the first production.
 - The second of the five hints alludes to starting from the beginning.
@@ -179,19 +164,19 @@ Under this hypothesis, it is possible to find another way to generate "showlog",
 
 Upon examining log.txt, we notice that each previous grammar is associated with a DFS traversal (Depth-First Search). For those unfamiliar with tree traversal techniques, a quick online search clarifies that DFS does not necessarily explore the entire tree. After close inspection, it becomes clear that the reason "getflag" wasn’t generated is precisely this.
 
-At this point, we need to generate something that modifies the tree traversal method. It is reasonable to try composing "traversal", possibly accompanied by a verb. Production X: pK | tra is a dead end. The correct productions are GNOTUV, and the first must be N. This way, "changetraversal" can be produced. If "showlog" is generated again, we can verify that the exploration method has changed. At this point, it is possible to recover the flag using the [grammar described earlier](#step-by-step-solution), and then download flag.txt to claim the well-deserved reward.
+At this point, we need to generate something that modifies the tree traversal method. It is reasonable to try composing "traversal", possibly accompanied by a verb. Production X: pK | tra is a dead end. The correct productions are GNOPTUV, and the first must be N. This way, "changetraversal" can be produced. If "showlog" is generated again, we can verify that the exploration method has changed. At this point, it is possible to recover the flag using the [grammar described earlier](#step-by-step-solution), and then download flag.txt to claim the well-deserved reward.
 
 ## Derivations
 
-| **Productions** | **Derivation**                                                                           |
-| --------------- | ---------------------------------------------------------------------------------------- |
-| **R**           | R → hint                                                                                 |
-| **AHLSW**       | A → pL → pleaS → pleaseHt → pleasehWt → pleasehint                                       |
-| **BGHKW(LV)**   | B → cLK → clVrK → clerrK → clearlog → clearlogP → clearlog                               |
-| **BGHKW(LV)**   | B → sH → shW → showK → showloG → showlogP → showlog                                      |
-| **BGMOQS**      | O → QI → SoI → shoI → showMG → showloG → showlogP → showlog                              |
-| **GNOTUV**      | N → cOG → chanG → chanGtrT → changPtrT → changetraUal → changetravVsal → changetraversal |
-| **ADGPQY**      | Y → GQY → gPQY → geQY → getDY → getflY → getflag                                         |
+| **Productions** | **Derivation**                                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------------------- |
+| **R**           | R → hint                                                                                             |
+| **AHLSW**       | A → pL → pleaS → pleaseHt → pleasehWt → pleasehint                                                   |
+| **BGHKW(LV)**   | B → cLK → clVrK → clerrK → clearlog → clearlogP → clearlog                                           |
+| **BGHKW(LV)**   | B → sH → shW → showK → showloG → showlogP → showlog                                                  |
+| **GIMOQS**      | O → QI → SoI → shoI → showMG → showloG → showlogP → showlog                                          |
+| **GNOPTUV**     | N → cOG → chanG → chanGtrT → changPtrT → changetrT → changetraUal → changetravVsal → changetraversal |
+| **ADGPQY**      | Y → GQY → gPQY → geQY → getDY → getflY → getflag                                                     |
 
 ## Conclusion
 
